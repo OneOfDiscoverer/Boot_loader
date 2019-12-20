@@ -11,7 +11,7 @@ int main(void)
 {
 	system_init();
 	USART_Config(2000000);
-	char str[32];
+	char str[32]; 
 	sprintf(str, "Boot\n");
 	USART_Puts(str);
 //	jump_to_appl();
