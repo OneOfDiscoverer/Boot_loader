@@ -11,4 +11,5 @@ void USART_Puts(char *);
 void USART_PutDat(uint32_t s);
 void USART2_IRQHandler(void);
 void do_modbus(void);
-
+void mb_wait(void);
+void buf_erase(void);

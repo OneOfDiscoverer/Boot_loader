@@ -11,12 +11,18 @@ void up_mt(void);
 enum Main_thread
 	{
 		MT_wait,
+		MT_waiting,
 		MT_reset,
 		MT_update_f,
 		MT_update_s,
 		MT_data_ready_f,
 		MT_data_ready_s,
-		MT_calc_all,
+		MT_data_ready_a,
+		MT_data_ready_b,
+		MT_data_ready_c,
+		MT_data_ready_d,
+		MT_calc_all_f,
+		MT_calc_all_s,
 	};
 
 #endif

@@ -4,7 +4,7 @@
 
 
 volatile uint8_t buf[BUF_LEN];
-volatile uint16_t len;
+volatile uint16_t len, state;
 
 void USART_Config(uint32_t baudRate) {
 	RCC->AHBENR |= RCC_AHBENR_GPIOAEN | RCC_AHBENR_DMAEN;
@@ -37,9 +37,14 @@ void USART_Putchar(uint8_t d) {
 	USART2->TDR = d;
 }
 
+void mb_wait(void)
+{
+	state = MB_STATE_START_WAIT;
+}
+
 void do_modbus(void)
 {
-	static uint16_t state, tmo;
+	static uint16_t tmo;
 	switch(state)
 	{
 		case MB_STATE_START_WAIT:
@@ -74,6 +79,12 @@ void do_modbus(void)
 			break;
 		}
 	}
+}
+
+void buf_erase(void)
+{
+	for(uint16_t i = 0; i < len; i++) buf[i] = 0;
+	len = 0;
 }
 
 void USART2_IRQHandler(void)

@@ -19,9 +19,8 @@ int main(void)
 	{
 		Watch_dog_reload();
 		do_modbus();
-		Flash_thread();
 		Main_thread();
-		
+		Flash_thread();
 	}
 }
 

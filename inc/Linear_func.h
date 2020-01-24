@@ -19,7 +19,7 @@ void jump_to_appl(void);
 void enter_boot(void);
 void check_firm(void);
 void RCC_init(void);
-uint8_t crc_calc(uint32_t* addr, uint32_t* end);
+uint32_t crc_calc(uint32_t* addr, uint32_t* end);
 void Watch_dog_init(void);
 void Watch_dog_reload(void);
 void system_init(void);

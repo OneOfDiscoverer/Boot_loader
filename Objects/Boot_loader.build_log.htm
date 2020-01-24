@@ -27,16 +27,30 @@ Project File Date:  12/17/2019
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-compiling main.c...
-src\main.c(15): warning:  #223-D: function "sprintf" declared implicitly
-  	sprintf(str, "Boot\n");
-src\main.c(30): warning:  #1-D: last line of file ends without a newline
-   
-src\main.c: 2 warnings, 0 errors
+compiling Main_thread.c...
+src\Main_thread.c(49): warning:  #223-D: function "sprintf" declared implicitly
+  					sprintf(str, "ready\n");
+src\Main_thread.c(58): warning:  #223-D: function "sprintf" declared implicitly
+  					sprintf(str, "Overrun\n");
+src\Main_thread.c(64): warning:  #223-D: function "sprintf" declared implicitly
+  					sprintf(str, "Com err\n");
+src\Main_thread.c(76): warning:  #223-D: function "sprintf" declared implicitly
+  					sprintf(str, "addr get\n");
+src\Main_thread.c(87): warning:  #223-D: function "sprintf" declared implicitly
+  					sprintf(str, "crc get\n");
+src\Main_thread.c(97): warning:  #223-D: function "sprintf" declared implicitly
+  					sprintf(str, "page received\n");
+src\Main_thread.c(109): warning:  #223-D: function "sprintf" declared implicitly
+  					sprintf(str, "crc right\n");
+src\Main_thread.c(115): warning:  #223-D: function "sprintf" declared implicitly
+  					sprintf(str, "crc %X err %X\n", crc, tmp);
+src\Main_thread.c(126): warning:  #223-D: function "sprintf" declared implicitly
+  				sprintf(str, "Page writed\n");
+src\Main_thread.c: 9 warnings, 0 errors
 linking...
-Program Size: Code=4244 RO-data=236 RW-data=44 ZI-data=3684  
+Program Size: Code=4680 RO-data=276 RW-data=56 ZI-data=3680  
 FromELF: creating hex file...
-".\Objects\Boot_loader.axf" - 0 Error(s), 2 Warning(s).
+".\Objects\Boot_loader.axf" - 0 Error(s), 9 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -62,11 +76,11 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.2.0
 
    * Component: Keil.Standalone::Device:Startup:1.0.0
+      Include file:  Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h
       Source file:   Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f030x8.s
       Source file:   MDK\Device\Source\ARM\STM32F0xx_OPT.s
-      Include file:  Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h
       Source file:   Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\system_stm32f0xx.c
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

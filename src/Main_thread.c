@@ -16,16 +16,21 @@ uint8_t MT_mode;
 
 void up_mt(void)
 {
-	MT_mode = MT_update_f;
+	if(MT_mode == MT_wait) MT_mode = MT_update_f;
 }
  
 void Main_thread(void)
 {
 	char str[32];
+	static uint32_t addl, addh, crc;
 	Watch_dog_reload();
 	if(FT_get_state() == FT_wait)
 		switch(MT_mode)
 		{
+			case MT_waiting:
+				//buf_erase();
+				MT_mode = MT_wait;
+				break;
 			case MT_wait:
 				break;
 			case MT_reset:
@@ -33,33 +38,115 @@ void Main_thread(void)
 				break;
 			case MT_update_f:
 				if(!strcmp((char*)"restart\n", (char*)buf)) NVIC_SystemReset();
-				else if(!strcmp((char*)"jump\n", (char*)buf)) jump_to_appl();
-				else if(!strcmp((char*)"flash\n", (char*)buf)) 
+				else if(!strcmp((char*)"jump\n", (char*)buf)) 
 				{
-					MT_mode = MT_data_ready_f;
-					num_page = 0;
+					jump_to_appl();
 				}
-				else MT_mode = MT_wait;
+				else if(!strcmp((char*)"addr\n", (char*)buf)) 
+				{
+					MT_mode = MT_update_s;
+					num_page = 0;
+					sprintf(str, "ready\n");
+					USART_Puts(str); 
+				}
+				else if(!strcmp((char*)"All crc\n", (char*)buf)) 
+				{
+					MT_mode = MT_calc_all_f;
+				}
+				else if(len == BUF_LEN) 
+				{
+					sprintf(str, "Overrun\n");
+					USART_Puts(str); 
+					MT_mode = MT_waiting;
+				}
+				else 
+				{
+					sprintf(str, "Com err\n");
+					USART_Puts(str); 
+					MT_mode = MT_waiting;
+				}
+				buf_erase();
+				break;
+			case MT_update_s:
+				if(len) 
+				{
+					mb_wait();
+					*(&addl) = *(uint32_t*)&buf[0];
+					*(&addh) = *(uint32_t*)&buf[4];
+					sprintf(str, "addr get\n");
+					USART_Puts(str); 
+					buf_erase();
+					MT_mode = MT_data_ready_f;
+				}
 				break;
 			case MT_data_ready_f:		
-				if(crc_calc((uint32_t*)&buf,  (uint32_t*)(&buf + BUF_LEN)) && len == BUF_LEN) 
+				if(len)	
 				{
-					FT_set_erase((uint32_t*)MAIN_PROGRAM_START_ADDRESS);
-					MT_mode = MT_data_ready_s;
-				}
-				else if(!len && len !=BUF_LEN) 
-				{
-					sprintf(str, "Frame error\n");
+					mb_wait();
+					*(&crc) = *(uint32_t*)&buf[0];
+					sprintf(str, "crc get\n");
 					USART_Puts(str); 
-					MT_mode = MT_wait;
+					buf_erase();
+					MT_mode = MT_data_ready_a;
 				}
 				break;
+			case MT_data_ready_a:
+				if(len == 1024) 
+				{
+					MT_mode = MT_data_ready_b;
+					sprintf(str, "page received\n");
+					USART_Puts(str); 
+				}
+				break;
+			case MT_data_ready_b:
+			{
+				uint32_t tmp;
+				tmp = crc_calc((uint32_t*)&buf,  (uint32_t*)&buf + 0x100);
+				
+				if(tmp == crc) 
+				{
+					FT_set_erase((uint16_t*)addl);
+					sprintf(str, "crc right\n");
+					USART_Puts(str); 
+					MT_mode = MT_data_ready_s;
+				}
+				else
+				{
+					sprintf(str, "crc %X err %X\n", crc, tmp);
+					USART_Puts(str); 
+					MT_mode = MT_waiting;
+				}
+			}
+				break;
 			case MT_data_ready_s:
-				FT_set_write((uint32_t*)MAIN_PROGRAM_START_ADDRESS + num_page*0x400, (uint32_t*)MAIN_PROGRAM_START_ADDRESS + num_page*0x400 + 0x400, (uint32_t*)&buf);
-				num_page++;
-				sprintf(str, "Page %d done\n", num_page);
+				FT_set_write((uint16_t*)addl, (uint16_t*)addh, (uint16_t*)buf);
+				MT_mode = MT_data_ready_c;
+				break;
+			case MT_data_ready_c:
+				sprintf(str, "Page writed\n");
+				buf_erase();
 				USART_Puts(str);
-				MT_mode = MT_wait;
+				MT_mode = MT_waiting;
+				break;
+			case MT_calc_all_f:
+				if(len)	
+				{
+					mb_wait();
+					*(&addl) 	= *(uint32_t*)&buf[0];
+					*(&addh) 	= *(uint32_t*)&buf[4];
+					*(&crc) 	= *(uint32_t*)&buf[8];
+					sprintf(str, "crc get\n");
+					USART_Puts(str); 
+					MT_mode = MT_calc_all_s;
+				}
+				break;
+			case MT_calc_all_s:
+				if(crc == crc_calc((uint32_t*)addl, (uint32_t*)addh))
+				{
+					sprintf(str, "crc right\n");
+					USART_Puts(str); 
+				}
+				MT_mode = MT_waiting;
 				break;
 		}
 }

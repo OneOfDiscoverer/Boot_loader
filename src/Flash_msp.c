@@ -3,24 +3,25 @@
 #include "setup.h"
 #include "MEM_map.h"
 
-volatile uint32_t FT_mode, *FT_addr, *FT_end_addr, *FT_data;
+volatile uint16_t FT_mode, *FT_addr, *FT_end_addr;
+volatile uint16_t *FT_data;
 
 void FT_unlock(void)
 {
-		FLASH->KEYR = FLASH_FKEY1;
-		FLASH->KEYR = FLASH_FKEY2; 
+	FLASH->KEYR = FLASH_FKEY1;
+	FLASH->KEYR = FLASH_FKEY2; 
 }
 uint32_t FT_get_state(void)
 {
 	return FT_mode;
 }
 
-void FT_set_erase(uint32_t* addr)
+void FT_set_erase(uint16_t* addr)
 {
 	FT_mode = FT_erase;
 	FT_addr = addr;
 }
-void FT_set_write(uint32_t* addr_st, uint32_t* addr_en, uint32_t* data)
+void FT_set_write(uint16_t* addr_st, uint16_t* addr_en, uint16_t* data)
 {
 	FT_mode = FT_write;
 	FT_addr = addr_st;
@@ -62,15 +63,17 @@ void Flash_thread(void)
 		case FT_write_done:
 			if(FLASH->SR & FLASH_SR_EOP)
 			{
+				FT_mode = FT_write;
 				FLASH->SR |= FLASH_SR_EOP;
 				FLASH->CR &= ~FLASH_CR_PG;
 				shift_addr++;
-				FT_mode = FT_write;
 				if((FT_addr+shift_addr) == FT_end_addr)
 				{
 					shift_addr = 0;
 					FT_mode = FT_wait;
 				}
+
+
 			}
 			break;
 	}

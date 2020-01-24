@@ -10,8 +10,8 @@
 
 
 void FT_unlock(void);
-void FT_set_write(uint32_t* addr_st, uint32_t* addr_en, uint32_t* data);
-void FT_set_erase(uint32_t* addr);
+void FT_set_write(uint16_t* addr_st, uint16_t* addr_en, uint16_t* data);
+void FT_set_erase(uint16_t* addr);
 void Flash_thread(void);
 uint32_t FT_get_state(void);
 

@@ -12,7 +12,7 @@ void system_init(void)
 	SysClockConfig();
 	RCC_init();
 //	Rcc_reset();	
-//	CRC_init();
+	CRC_init();
 	GPIO_init();
 //	check_firm();
 	FT_unlock();
@@ -77,9 +77,10 @@ void check_firm(void)
 	}
 }
 
-uint8_t crc_calc(uint32_t* addr, uint32_t* end)
+uint32_t crc_calc(uint32_t* addr, uint32_t* end)
 {
-	CRC->CR = CRC_CR_RESET | CRC_CR_REV_IN_0 | CRC_CR_REV_OUT; //CRC-32/JAMCRC, need xor for compabile with casual crc32
+	CRC->CR = CRC_CR_RESET | CRC_CR_REV_IN | CRC_CR_REV_OUT; //CRC-32/JAMCRC, need xor for compabile with casual crc32 
+//	CRC->DR = 0xFFFFFFFF;
 	if(addr != end)
 	{
 		while	(addr != end)
@@ -87,9 +88,8 @@ uint8_t crc_calc(uint32_t* addr, uint32_t* end)
 			CRC->DR = *addr;
 			addr++;
 		}
-		if(!CRC->DR) return 1;
 	}
-	return 0;
+	return CRC->DR;
 }
 
 void Set_link_cnt(uint16_t cnt, uint8_t n)		//set led on duration
