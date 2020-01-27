@@ -14,7 +14,6 @@ int main(void)
 	char str[32]; 
 	sprintf(str, "Boot\n");
 	USART_Puts(str);
-//	jump_to_appl();
 	while(1)
 	{
 		Watch_dog_reload();

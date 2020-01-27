@@ -14,7 +14,7 @@ void system_init(void)
 //	Rcc_reset();	
 	CRC_init();
 	GPIO_init();
-//	check_firm();
+	check_firm();
 	FT_unlock();
 	SysTick_init();
 }
@@ -45,7 +45,7 @@ void SysClockConfig(void)
 
 void jump_to_appl(void) 
 {
-//  __disable_irq();
+  __disable_irq();
 //  
 //  volatile uint32_t *RAMVectorTable = (volatile uint32_t *)RAM_START_ADDRESS;
 //  for(uint32_t iVector = 0; iVector < 48; iVector++) 
@@ -58,7 +58,7 @@ void jump_to_appl(void)
   pfunc_jump_to_appl FuncJumpToAppl = (pfunc_jump_to_appl)ApplJumpAddr;
   __set_MSP(*(__IO uint32_t *)MAIN_PROGRAM_START_ADDRESS);
 	
-//	__enable_irq();
+	__enable_irq();
 	
   FuncJumpToAppl(); 
 }
@@ -70,10 +70,17 @@ void HardFault_Handler(void)
 
 void check_firm(void)
 {
-	if(!(*(uint32_t *)BOOT_LOADER_DATA_PAGE == KEY_UPDATE) && (*(uint32_t *)MAIN_PROGRAM_START_ADDRESS >=0x20000000 && *(uint32_t *)MAIN_PROGRAM_START_ADDRESS <=0x20002000))
+	uint32_t addr_l, addr_h, crc;
+	addr_l = 	*((uint16_t*)(BOOT_LOADER_DATA_PAGE)+2) << 16 | *((uint16_t*)(BOOT_LOADER_DATA_PAGE)+1);
+	addr_h = 	*((uint16_t*)(BOOT_LOADER_DATA_PAGE)+4) << 16 | *((uint16_t*)(BOOT_LOADER_DATA_PAGE)+3);
+	crc = 		*((uint16_t*)(BOOT_LOADER_DATA_PAGE)+6) << 16 | *((uint16_t*)(BOOT_LOADER_DATA_PAGE)+5);
+	if((addr_l != 0xFFFFFFFF) && (addr_h != 0xFFFFFFFF) && (crc != 0xFFFFFFFF))
 	{
-		if(crc_calc((uint32_t*)(MAIN_PROGRAM_START_ADDRESS), (uint32_t*)(MAIN_PROGRAM_START_ADDRESS + LENGHT)))
-			jump_to_appl();
+		if(crc_calc((uint32_t*)addr_l, (uint32_t*)addr_h) == crc)	
+		{
+			if(*(uint16_t *)BOOT_LOADER_DATA_PAGE != KEY_UPDATE) 
+				jump_to_appl();
+		}
 	}
 }
 

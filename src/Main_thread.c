@@ -8,7 +8,7 @@
 #include "string.h"
 
 extern void Set_link_cnt(uint16_t cnt, uint8_t n);
-extern volatile uint8_t buf[BUF_LEN];
+extern volatile uint16_t buf[BUF_LEN];
 extern volatile uint16_t len;
 
 uint16_t num_page;
@@ -27,43 +27,45 @@ void Main_thread(void)
 	if(FT_get_state() == FT_wait)
 		switch(MT_mode)
 		{
-			case MT_waiting:
-				//buf_erase();
-				MT_mode = MT_wait;
-				break;
 			case MT_wait:
 				break;
 			case MT_reset:
 				NVIC_SystemReset();
 				break;
 			case MT_update_f:
-				if(!strcmp((char*)"restart\n", (char*)buf)) NVIC_SystemReset();
-				else if(!strcmp((char*)"jump\n", (char*)buf)) 
+				if(buf[0] == 0xDE) NVIC_SystemReset();
+				else if(buf[0] == 0x55)
 				{
-					jump_to_appl();
+					sprintf(str, "Boot\n");
+					USART_Puts(str); 
 				}
-				else if(!strcmp((char*)"addr\n", (char*)buf)) 
+				else if(buf[0] == 0x01) jump_to_appl();
+				else if(buf[0] == 0x02)
 				{
 					MT_mode = MT_update_s;
 					num_page = 0;
 					sprintf(str, "ready\n");
 					USART_Puts(str); 
 				}
-				else if(!strcmp((char*)"All crc\n", (char*)buf)) 
+				else if(buf[0] == 0x04) 
 				{
 					MT_mode = MT_calc_all_f;
+					num_page = 0;
+					sprintf(str, "ready\n");
+					USART_Puts(str); 
+					
 				}
 				else if(len == BUF_LEN) 
 				{
 					sprintf(str, "Overrun\n");
 					USART_Puts(str); 
-					MT_mode = MT_waiting;
+					MT_mode = MT_wait;
 				}
 				else 
 				{
 					sprintf(str, "Com err\n");
 					USART_Puts(str); 
-					MT_mode = MT_waiting;
+					MT_mode = MT_wait;
 				}
 				buf_erase();
 				break;
@@ -71,8 +73,8 @@ void Main_thread(void)
 				if(len) 
 				{
 					mb_wait();
-					*(&addl) = *(uint32_t*)&buf[0];
-					*(&addh) = *(uint32_t*)&buf[4];
+					*(&addl) = *(uint16_t*)&buf[0];
+					*(&addh) = *(uint16_t*)&buf[2];
 					sprintf(str, "addr get\n");
 					USART_Puts(str); 
 					buf_erase();
@@ -114,7 +116,7 @@ void Main_thread(void)
 				{
 					sprintf(str, "crc %X err %X\n", crc, tmp);
 					USART_Puts(str); 
-					MT_mode = MT_waiting;
+					MT_mode = MT_wait;
 				}
 			}
 				break;
@@ -126,27 +128,48 @@ void Main_thread(void)
 				sprintf(str, "Page writed\n");
 				buf_erase();
 				USART_Puts(str);
-				MT_mode = MT_waiting;
+				MT_mode = MT_wait;
 				break;
 			case MT_calc_all_f:
 				if(len)	
 				{
 					mb_wait();
 					*(&addl) 	= *(uint32_t*)&buf[0];
-					*(&addh) 	= *(uint32_t*)&buf[4];
-					*(&crc) 	= *(uint32_t*)&buf[8];
+					*(&addh) 	= *(uint32_t*)&buf[2];
+					*(&crc) 	= *(uint32_t*)&buf[4];
+					FT_set_erase((uint16_t*)BOOT_LOADER_DATA_PAGE);	
 					sprintf(str, "crc get\n");
 					USART_Puts(str); 
 					MT_mode = MT_calc_all_s;
 				}
 				break;
 			case MT_calc_all_s:
-				if(crc == crc_calc((uint32_t*)addl, (uint32_t*)addh))
+				{
+				uint32_t tmp = crc_calc((uint32_t*)addl, (uint32_t*)addh);
+				if(crc == tmp)
 				{
 					sprintf(str, "crc right\n");
 					USART_Puts(str); 
+					uint16_t buf_flash[6];
+					
+					*(uint32_t*)&buf_flash[0] = *(&addl);
+					*(uint32_t*)&buf_flash[2] = *(&addh);
+					*(uint32_t*)&buf_flash[4] = *(&crc);
+					FT_set_write((uint16_t*)BOOT_LOADER_DATA_PAGE+1, (uint16_t*)BOOT_LOADER_DATA_PAGE+7, (uint16_t*)&buf_flash[0]);
 				}
-				MT_mode = MT_waiting;
+				else 
+				{
+					sprintf(str, "!crc\n");
+					USART_Puts(str); 					
+				}
+				MT_mode = MT_jump;
+				buf_erase();
+				
+				}
+				break;
+			case MT_jump:
+				check_firm();
+				MT_mode = MT_wait;
 				break;
 		}
 }
