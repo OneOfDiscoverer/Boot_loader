@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Boot_loader.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Boot_loader.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Jan 29 16:36:10 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Jan 29 21:42:44 2020
 <BR><P>
 <H3>Maximum Stack Usage =        208 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -353,10 +353,10 @@ Global Symbols
 
 <P><STRONG><a name="[88]"></a>__aeabi_uidiv</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, aeabi_sdiv.o(.text), UNUSED)
 
-<P><STRONG><a name="[59]"></a>__aeabi_uidivmod</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, aeabi_sdiv.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
-<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_init
-<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Config
+<P><STRONG><a name="[58]"></a>__aeabi_uidivmod</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, aeabi_sdiv.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_init
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Config
 </UL>
 
 <P><STRONG><a name="[89]"></a>__aeabi_idiv</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, aeabi_sdiv.o(.text), UNUSED)
@@ -430,8 +430,8 @@ Global Symbols
 
 <P><STRONG><a name="[92]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[62]"></a>CRC_init</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, linear_func.o(i.CRC_init))
-<BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
+<P><STRONG><a name="[63]"></a>CRC_init</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, linear_func.o(i.CRC_init))
+<BR><BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
 </UL>
 
 <P><STRONG><a name="[4d]"></a>FT_get_state</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, flash_msp.o(i.FT_get_state))
@@ -448,8 +448,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Main_thread
 </UL>
 
-<P><STRONG><a name="[63]"></a>FT_unlock</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, flash_msp.o(i.FT_unlock))
-<BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
+<P><STRONG><a name="[62]"></a>FT_unlock</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, flash_msp.o(i.FT_unlock))
+<BR><BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
 </UL>
 
 <P><STRONG><a name="[47]"></a>Flash_thread</STRONG> (Thumb, 252 bytes, Stack size 4 bytes, flash_msp.o(i.Flash_thread))
@@ -465,13 +465,13 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
+<BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
 </UL>
 
 <P><STRONG><a name="[7]"></a>HardFault_Handler</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, linear_func.o(i.HardFault_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f030x8.o(RESET)
 </UL>
-<P><STRONG><a name="[4b]"></a>Main_thread</STRONG> (Thumb, 606 bytes, Stack size 56 bytes, main_thread.o(i.Main_thread))
+<P><STRONG><a name="[4b]"></a>Main_thread</STRONG> (Thumb, 624 bytes, Stack size 56 bytes, main_thread.o(i.Main_thread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
 <LI>Call Chain = Main_thread &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -494,40 +494,36 @@ Global Symbols
 <P><STRONG><a name="[61]"></a>RCC_init</STRONG> (Thumb, 148 bytes, Stack size 12 bytes, linear_func.o(i.RCC_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = RCC_init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
+<BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
 </UL>
 
-<P><STRONG><a name="[56]"></a>Set_link_cnt</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, linear_func.o(i.Set_link_cnt))
-<BR><BR>[Called By]<UL><LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
+<P><STRONG><a name="[60]"></a>Rcc_reset</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, linear_func.o(i.Rcc_reset))
+<BR><BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
 </UL>
 
-<P><STRONG><a name="[60]"></a>SysClockConfig</STRONG> (Thumb, 178 bytes, Stack size 0 bytes, linear_func.o(i.SysClockConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
+<P><STRONG><a name="[5f]"></a>SysClockConfig</STRONG> (Thumb, 178 bytes, Stack size 0 bytes, linear_func.o(i.SysClockConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
 </UL>
 
-<P><STRONG><a name="[a]"></a>SysTick_Handler</STRONG> (Thumb, 134 bytes, Stack size 4 bytes, linear_func.o(i.SysTick_Handler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = SysTick_Handler
-</UL>
-<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_link_cnt
-</UL>
+<P><STRONG><a name="[a]"></a>SysTick_Handler</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, linear_func.o(i.SysTick_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f030x8.o(RESET)
 </UL>
-<P><STRONG><a name="[57]"></a>SysTick_init</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, linear_func.o(i.SysTick_init))
+<P><STRONG><a name="[56]"></a>SysTick_init</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, linear_func.o(i.SysTick_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = SysTick_init &rArr; SystemCoreClockUpdate
 </UL>
-<BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
+<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
+<BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
 </UL>
 
-<P><STRONG><a name="[58]"></a>SystemCoreClockUpdate</STRONG> (Thumb, 156 bytes, Stack size 24 bytes, system_stm32f0xx.o(i.SystemCoreClockUpdate))
+<P><STRONG><a name="[57]"></a>SystemCoreClockUpdate</STRONG> (Thumb, 156 bytes, Stack size 24 bytes, system_stm32f0xx.o(i.SystemCoreClockUpdate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = SystemCoreClockUpdate
 </UL>
-<BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_init
-<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Config
+<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_init
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Config
 </UL>
 
 <P><STRONG><a name="[24]"></a>SystemInit</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, system_stm32f0xx.o(i.SystemInit))
@@ -536,11 +532,11 @@ Global Symbols
 <P><STRONG><a name="[23]"></a>USART2_IRQHandler</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, usart.o(i.USART2_IRQHandler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f030x8.o(RESET)
 </UL>
-<P><STRONG><a name="[5a]"></a>USART_Config</STRONG> (Thumb, 154 bytes, Stack size 8 bytes, usart.o(i.USART_Config))
+<P><STRONG><a name="[59]"></a>USART_Config</STRONG> (Thumb, 154 bytes, Stack size 8 bytes, usart.o(i.USART_Config))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = USART_Config &rArr; SystemCoreClockUpdate
 </UL>
-<BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
+<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -550,8 +546,8 @@ Global Symbols
 <LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[5f]"></a>Watch_dog_init</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, linear_func.o(i.Watch_dog_init))
-<BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
+<P><STRONG><a name="[5e]"></a>Watch_dog_init</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, linear_func.o(i.Watch_dog_init))
+<BR><BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
 </UL>
 
 <P><STRONG><a name="[4c]"></a>Watch_dog_reload</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, linear_func.o(i.Watch_dog_reload))
@@ -570,24 +566,24 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Main_thread
 </UL>
 
-<P><STRONG><a name="[5b]"></a>check_firm</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, linear_func.o(i.check_firm))
+<P><STRONG><a name="[5a]"></a>check_firm</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, linear_func.o(i.check_firm))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = check_firm &rArr; jump_to_appl
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jump_to_appl
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;crc_calc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
+<BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
 </UL>
 
 <P><STRONG><a name="[53]"></a>crc_calc</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, linear_func.o(i.crc_calc))
-<BR><BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_firm
+<BR><BR>[Called By]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_firm
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Main_thread
 </UL>
 
-<P><STRONG><a name="[5c]"></a>do_modbus</STRONG> (Thumb, 202 bytes, Stack size 8 bytes, usart.o(i.do_modbus))
+<P><STRONG><a name="[5b]"></a>do_modbus</STRONG> (Thumb, 202 bytes, Stack size 8 bytes, usart.o(i.do_modbus))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = do_modbus
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up_mt
+<BR>[Calls]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;up_mt
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -598,10 +594,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_init
 </UL>
 
-<P><STRONG><a name="[4f]"></a>jump_to_appl</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, linear_func.o(i.jump_to_appl))
+<P><STRONG><a name="[4f]"></a>jump_to_appl</STRONG> (Thumb, 22 bytes, Stack size 16 bytes, linear_func.o(i.jump_to_appl))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = jump_to_appl
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_firm
+<BR>[Called By]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_firm
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Main_thread
 </UL>
 
@@ -610,11 +606,11 @@ Global Symbols
 <LI>Call Chain = main &rArr; Main_thread &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
-<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;do_modbus
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_init
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;do_modbus
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Watch_dog_reload
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Puts
-<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Config
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Config
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Main_thread
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_thread
 </UL>
@@ -625,23 +621,24 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Main_thread
 </UL>
 
-<P><STRONG><a name="[5e]"></a>system_init</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, linear_func.o(i.system_init))
+<P><STRONG><a name="[5d]"></a>system_init</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, linear_func.o(i.system_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = system_init &rArr; GPIO_init &rArr; gpio_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_firm
-<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Watch_dog_init
-<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_init
-<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysClockConfig
+<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_firm
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Watch_dog_init
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_init
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysClockConfig
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Rcc_reset
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_init
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_init
-<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CRC_init
-<LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FT_unlock
+<LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CRC_init
+<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FT_unlock
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[5d]"></a>up_mt</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, main_thread.o(i.up_mt))
-<BR><BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;do_modbus
+<P><STRONG><a name="[5c]"></a>up_mt</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, main_thread.o(i.up_mt))
+<BR><BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;do_modbus
 </UL>
 <P>
 <H3>

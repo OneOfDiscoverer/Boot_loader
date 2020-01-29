@@ -7,9 +7,9 @@
 #include "usart.h"
 #include "string.h"
 
-extern void Set_link_cnt(uint16_t cnt, uint8_t n);
-extern volatile uint16_t buf[BUF_LEN];
-extern volatile uint16_t len;
+
+extern volatile uint16_t buf[BUF_LEN], len;
+extern volatile uint16_t led_cnt_0;
 
 uint16_t num_page;
 uint8_t MT_mode;
@@ -153,12 +153,13 @@ void Main_thread(void)
 						sprintf(str, "!crc\n");
 						USART_Puts(str); 					
 					}
+					led_cnt_0 = 2000;
 					MT_mode = MT_jump;
 					buf_erase();
 				}
 				break;
 			case MT_jump:
-				NVIC_SystemReset();
+				if(!led_cnt_0) NVIC_SystemReset();
 				break;
 		}
 }

@@ -4,18 +4,17 @@
 #include "gpio_init.h"
 #include "Flash_msp.h"
 
-volatile uint16_t led_cnt_0, led_cnt_1, led_cnt_2, cnt_timer;
-
+volatile uint16_t led_cnt_0, cnt_timer;
 void system_init(void)
 {
 	Watch_dog_init();
 	SysClockConfig();
+	Rcc_reset();	
 	RCC_init();
-	//Rcc_reset();	
+	FT_unlock();
 	CRC_init();
 	GPIO_init();
 	check_firm();
-	FT_unlock();
 	SysTick_init();
 }
 
@@ -45,7 +44,7 @@ void SysClockConfig(void)
 
 void jump_to_appl(void) 
 {
-  __disable_irq();
+//  __disable_irq();
 //  
 //  volatile uint32_t *RAMVectorTable = (volatile uint32_t *)RAM_START_ADDRESS;
 //  for(uint32_t iVector = 0; iVector < 48; iVector++) 
@@ -58,7 +57,7 @@ void jump_to_appl(void)
   pfunc_jump_to_appl FuncJumpToAppl = (pfunc_jump_to_appl)ApplJumpAddr;
   __set_MSP(*(__IO uint32_t *)MAIN_PROGRAM_START_ADDRESS);
 	
-	__enable_irq();
+//	__enable_irq();
 	
   FuncJumpToAppl(); 
 }
@@ -99,37 +98,12 @@ uint32_t crc_calc(uint32_t* addr, uint32_t* end)
 	return CRC->DR;
 }
 
-void Set_link_cnt(uint16_t cnt, uint8_t n)		//set led on duration
-{
-	switch(n)
-	{
-		case 0: led_cnt_0 = cnt; LED0ON(); break;
-		case 1: led_cnt_1 = cnt; LED1ON(); break;
-		case 2: led_cnt_2 = cnt; LED2ON(); break;
-	}
-}
-
-void Set_link_mb_cnt(uint16_t cnt)		//set led on duration
-{
-		led_cnt_1 = cnt; LED1ON();
-		led_cnt_2 = cnt; LED2ON();
-}
-
 void SysTick_Handler(void)				//handler systick
 {
 	if(cnt_timer) 	cnt_timer--;
-	else
-	{	
-		Set_link_cnt(150,0);
-		Set_link_cnt(150,2);
-		cnt_timer = 1000; 
-	}
+	else cnt_timer = 1000; 
 	if(led_cnt_0) led_cnt_0--;
-	else LED0OFF();
-	if(led_cnt_1) led_cnt_1--;
-	else LED1OFF(); 
-	if(led_cnt_2) led_cnt_2--;
-	else LED2OFF();
+
 }
 
 void RCC_init(void)
@@ -177,13 +151,11 @@ void SysTick_init(void)						//init systick
 void Rcc_reset(void)
 {
 		RCC -> AHBRSTR |= RCC_AHBRSTR_GPIOARST | RCC_AHBRSTR_GPIOBRST;	
-		RCC -> APB1RSTR |=  RCC_APB1RSTR_USART2RST;
-		RCC -> APB2RSTR |=	RCC_APB2RSTR_USART1RST;
+		RCC -> APB1RSTR |=	RCC_APB1RSTR_USART2RST;
 		uint16_t i = 0xFFFF;
 		while(i)	i--;
 		RCC -> AHBRSTR &= ~(RCC_AHBRSTR_GPIOARST | RCC_AHBRSTR_GPIOBRST);
 		RCC -> APB1RSTR &= ~RCC_APB1RSTR_USART2RST; 
-		RCC -> APB2RSTR &= ~RCC_APB2RSTR_USART1RST;
 		i = 0xFFFF;
 		while(i)	i--;
 }
