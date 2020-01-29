@@ -3,7 +3,7 @@
 #include "Main_thread.h"
 
 
-volatile uint8_t buf[BUF_LEN];
+volatile uint16_t buf[BUF_LEN];
 volatile uint16_t len, state;
 
 void USART_Config(uint32_t baudRate) {

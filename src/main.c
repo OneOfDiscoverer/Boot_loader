@@ -11,9 +11,9 @@ int main(void)
 {
 	system_init();
 	USART_Config(2000000);
-	char str[32]; 
+	char str[32];
 	sprintf(str, "Boot\n");
-	USART_Puts(str);
+	USART_Puts(str); 
 	while(1)
 	{
 		Watch_dog_reload();

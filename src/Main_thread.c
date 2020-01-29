@@ -33,41 +33,36 @@ void Main_thread(void)
 				NVIC_SystemReset();
 				break;
 			case MT_update_f:
-				if(buf[0] == 0xDE) NVIC_SystemReset();
-				else if(buf[0] == 0x55)
+				switch((uint8_t)buf[0])
 				{
-					sprintf(str, "Boot\n");
-					USART_Puts(str); 
-				}
-				else if(buf[0] == 0x01) jump_to_appl();
-				else if(buf[0] == 0x02)
-				{
-					MT_mode = MT_update_s;
-					num_page = 0;
-					sprintf(str, "ready\n");
-					USART_Puts(str); 
-				}
-				else if(buf[0] == 0x04) 
-				{
-					MT_mode = MT_calc_all_f;
-					num_page = 0;
-					sprintf(str, "ready\n");
-					USART_Puts(str); 
-					
-				}
-				else if(len == BUF_LEN) 
-				{
-					sprintf(str, "Overrun\n");
-					USART_Puts(str); 
-					MT_mode = MT_wait;
-				}
-				else 
-				{
-					sprintf(str, "Com err\n");
-					USART_Puts(str); 
-					MT_mode = MT_wait;
+					case 0xDE:
+						NVIC_SystemReset();
+						break;
+					case 0x55:
+						sprintf(str, "Boot\n");
+						MT_mode = MT_wait;
+						break;
+					case 0x01:
+						jump_to_appl();
+						break;
+					case 0x02:
+						MT_mode = MT_update_s;
+						num_page = 0;
+						sprintf(str, "ready\n");
+						break;
+					case 0x04:
+						MT_mode = MT_calc_all_f;
+						num_page = 0;
+						sprintf(str, "ready\n"); 
+						break;
+					default:
+						if(len == BUF_LEN) sprintf(str, "Overrun\n");
+						else sprintf(str, "Com err\n");
+						MT_mode = MT_wait;
+						break;
 				}
 				buf_erase();
+				USART_Puts(str); 
 				break;
 			case MT_update_s:
 				if(len) 
@@ -96,8 +91,6 @@ void Main_thread(void)
 				if(len == 1024) 
 				{
 					MT_mode = MT_data_ready_b;
-					sprintf(str, "page received\n");
-					USART_Puts(str); 
 				}
 				break;
 			case MT_data_ready_b:
@@ -108,8 +101,6 @@ void Main_thread(void)
 				if(tmp == crc) 
 				{
 					FT_set_erase((uint16_t*)addl);
-					sprintf(str, "crc right\n");
-					USART_Puts(str); 
 					MT_mode = MT_data_ready_s;
 				}
 				else
@@ -145,72 +136,30 @@ void Main_thread(void)
 				break;
 			case MT_calc_all_s:
 				{
-				uint32_t tmp = crc_calc((uint32_t*)addl, (uint32_t*)addh);
-				if(crc == tmp)
-				{
-					sprintf(str, "crc right\n");
-					USART_Puts(str); 
-					uint16_t buf_flash[6];
-					
-					*(uint32_t*)&buf_flash[0] = *(&addl);
-					*(uint32_t*)&buf_flash[2] = *(&addh);
-					*(uint32_t*)&buf_flash[4] = *(&crc);
-					FT_set_write((uint16_t*)BOOT_LOADER_DATA_PAGE+1, (uint16_t*)BOOT_LOADER_DATA_PAGE+7, (uint16_t*)&buf_flash[0]);
-				}
-				else 
-				{
-					sprintf(str, "!crc\n");
-					USART_Puts(str); 					
-				}
-				MT_mode = MT_jump;
-				buf_erase();
-				
+					uint32_t tmp = crc_calc((uint32_t*)addl, (uint32_t*)addh);
+					if(crc == tmp)
+					{
+						sprintf(str, "crc right\n");
+						USART_Puts(str); 
+						uint16_t buf_flash[6];
+						
+						*(uint32_t*)&buf_flash[0] = *(&addl);
+						*(uint32_t*)&buf_flash[2] = *(&addh);
+						*(uint32_t*)&buf_flash[4] = *(&crc);
+						FT_set_write((uint16_t*)BOOT_LOADER_DATA_PAGE+1, (uint16_t*)BOOT_LOADER_DATA_PAGE+7, (uint16_t*)&buf_flash[0]);
+					}
+					else 
+					{
+						sprintf(str, "!crc\n");
+						USART_Puts(str); 					
+					}
+					MT_mode = MT_jump;
+					buf_erase();
 				}
 				break;
 			case MT_jump:
-				check_firm();
-				MT_mode = MT_wait;
+				NVIC_SystemReset();
 				break;
 		}
 }
 
-
-//			case MT_update_f:
-//				FT_set_erase((uint16_t*)BOOT_LOADER_DATA_PAGE);
-//				MT_mode = MT_update_s;
-//				break;
-//			case MT_update_s:
-//				FT_set_write(	(uint16_t*)BOOT_LOADER_DATA_PAGE+1, (uint16_t*)BOOT_LOADER_DATA_PAGE+7, (uint16_t*)&ext_start_addr_l);
-//				ext_command_reg &= ~(_COM_UPDATE);
-//				MT_mode = MT_wait;
-//				break;
-//			case MT_data_ready_f:
-//				ext_end_addr_h = ext_start_addr_h;
-//				ext_end_addr_l = ext_start_addr_l+_PAGE8_LENGHT;
-//				if(crc_calc((uint32_t*)&ext_data_page, ((uint32_t*)&ext_data_page+_BUF32_LENGHT)))
-//				{
-//					ext_command_reg &= ~(_FLAG_CRC_MB_BUF);
-//					FT_set_erase((uint16_t*)(ext_start_addr_h << 16 | ext_start_addr_l));
-//					MT_mode = MT_data_ready_s;
-//				}
-//				else
-//				{
-//					ext_command_reg |= _FLAG_CRC_MB_BUF;
-//					ext_command_reg &= ~(_COM_DATA_READY);
-//					MT_mode = MT_wait;
-//				}
-//				break;
-//			case MT_data_ready_s:
-//				FT_set_write(	(uint16_t*)(ext_start_addr_h << 16 | ext_start_addr_l),
-//											(uint16_t*)(ext_end_addr_h << 16 | ext_end_addr_l),
-//											(uint16_t*)&ext_data_page);
-//				MT_mode = MT_calc_all;
-//				break;
-//			case MT_calc_all:
-//				if(crc_calc((uint32_t*)(ext_start_addr_h << 16 | ext_start_addr_l), 
-//					(uint32_t*)(ext_end_addr_h << 16 | ext_end_addr_l)))
-//					ext_command_reg &= ~(_FLAG_CRC_FLASH);
-//				else 	
-//					ext_command_reg |= _FLAG_CRC_FLASH;
-//				ext_command_reg &= ~(_COM_DATA_READY | _COM_CALC_ALL);
-//				MT_mode = MT_wait;

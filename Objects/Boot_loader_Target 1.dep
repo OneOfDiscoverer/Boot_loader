@@ -1,5 +1,5 @@
 Dependencies for Project 'Boot_loader', Target 'Target 1': (DO NOT MODIFY !)
-F (.\src\main.c)(0x5E2EB78D)(--c99 -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\inc -I ..\inc -I D:\Firmware -I ..\Lib_gen\inc-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F030x8-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\src\main.c)(0x5E314494)(--c99 -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\inc -I ..\inc -I D:\Firmware -I ..\Lib_gen\inc-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F030x8-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h)(0x59787BBE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f030x8.h)(0x59787BBE)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\core_cm0.h)(0x5C8B6E06)
@@ -12,7 +12,7 @@ I (.\inc\setup.h)(0x5B1A08C9)
 I (.\inc\Main_thread.h)(0x5E2EB481)
 I (.\inc\Linear_func.h)(0x5E031CA2)
 I (.\inc\Flash_msp.h)(0x5E26A69F)
-I (.\inc\usart.h)(0x5E26AD8A)
+I (.\inc\usart.h)(0x5E3125DF)
 F (.\src\Flash_msp.c)(0x5E26AF0C)(--c99 -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\inc -I ..\inc -I D:\Firmware -I ..\Lib_gen\inc-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F030x8-o .\objects\flash_msp.o --omf_browse .\objects\flash_msp.crf --depend .\objects\flash_msp.d)
 I (.\inc\Flash_msp.h)(0x5E26A69F)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h)(0x59787BBE)
@@ -25,7 +25,7 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_armcc.h)(0x5C8F5
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x59787BBE)
 I (.\inc\setup.h)(0x5B1A08C9)
 I (.\inc\MEM_map.h)(0x5DF8A1E1)
-F (.\src\Main_thread.c)(0x5E2EB63B)(--c99 -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\inc -I ..\inc -I D:\Firmware -I ..\Lib_gen\inc-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F030x8-o .\objects\main_thread.o --omf_browse .\objects\main_thread.crf --depend .\objects\main_thread.d)
+F (.\src\Main_thread.c)(0x5E315209)(--c99 -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\inc -I ..\inc -I D:\Firmware -I ..\Lib_gen\inc-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F030x8-o .\objects\main_thread.o --omf_browse .\objects\main_thread.crf --depend .\objects\main_thread.d)
 I (.\inc\Main_thread.h)(0x5E2EB481)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h)(0x59787BBE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f030x8.h)(0x59787BBE)
@@ -39,9 +39,9 @@ I (.\inc\setup.h)(0x5B1A08C9)
 I (.\inc\Flash_msp.h)(0x5E26A69F)
 I (.\inc\Linear_func.h)(0x5E031CA2)
 I (.\inc\MEM_map.h)(0x5DF8A1E1)
-I (.\inc\usart.h)(0x5E26AD8A)
+I (.\inc\usart.h)(0x5E3125DF)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599EDB3C)
-F (.\src\Linear_func.c)(0x5E2EB3CD)(--c99 -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\inc -I ..\inc -I D:\Firmware -I ..\Lib_gen\inc-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F030x8-o .\objects\linear_func.o --omf_browse .\objects\linear_func.crf --depend .\objects\linear_func.d)
+F (.\src\Linear_func.c)(0x5E314350)(--c99 -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\inc -I ..\inc -I D:\Firmware -I ..\Lib_gen\inc-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F030x8-o .\objects\linear_func.o --omf_browse .\objects\linear_func.crf --depend .\objects\linear_func.d)
 I (.\inc\Linear_func.h)(0x5E031CA2)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h)(0x59787BBE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f030x8.h)(0x59787BBE)
@@ -65,7 +65,7 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_version.h)(0x5B9
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_compiler.h)(0x5C8F5BE4)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_armcc.h)(0x5C8F5BE4)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x59787BBE)
-F (.\src\usart.c)(0x5E02D58F)(--c99 -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\inc -I ..\inc -I D:\Firmware -I ..\Lib_gen\inc-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F030x8-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d)
+F (.\src\usart.c)(0x5E313B61)(--c99 -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\inc -I ..\inc -I D:\Firmware -I ..\Lib_gen\inc-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F030x8-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h)(0x59787BBE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f030x8.h)(0x59787BBE)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\core_cm0.h)(0x5C8B6E06)
@@ -74,7 +74,7 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_version.h)(0x5B9
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_compiler.h)(0x5C8F5BE4)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_armcc.h)(0x5C8F5BE4)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x59787BBE)
-I (.\inc\usart.h)(0x5E26AD8A)
+I (.\inc\usart.h)(0x5E3125DF)
 I (.\inc\Main_thread.h)(0x5E2EB481)
 F (RTE\Device\STM32F030C8Tx\startup_stm32f030x8.s)(0x59787BBE)(--cpu Cortex-M0 -g --apcs=interwork -I .\inc-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include--pd "__UVISION_VERSION SETA 525" --pd "_RTE_ SETA 1" --pd "STM32F030x8 SETA 1"--list .\listings\startup_stm32f030x8.lst --xref -o .\objects\startup_stm32f030x8.o --depend .\objects\startup_stm32f030x8.d)
 F (RTE\Device\STM32F030C8Tx\system_stm32f0xx.c)(0x59787BBE)(--c99 -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\inc -I ..\inc -I D:\Firmware -I ..\Lib_gen\inc-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F030x8-o .\objects\system_stm32f0xx.o --omf_browse .\objects\system_stm32f0xx.crf --depend .\objects\system_stm32f0xx.d)

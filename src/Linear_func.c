@@ -11,7 +11,7 @@ void system_init(void)
 	Watch_dog_init();
 	SysClockConfig();
 	RCC_init();
-//	Rcc_reset();	
+	//Rcc_reset();	
 	CRC_init();
 	GPIO_init();
 	check_firm();
